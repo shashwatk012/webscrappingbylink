@@ -1,4 +1,6 @@
 const { proxies_list } = require("../text");
+const http = require("http");
+const axios = require("axios");
 
 const proxyReq = async (url) => {
   try {
@@ -41,11 +43,13 @@ const proxyReq = async (url) => {
 
     const response = await axios.get(targetUrl, headers);
     const html = response.data;
+    console.log(html.substring(1, 100));
 
     return html;
   } catch (error) {
+    console.log(error);
     return "";
   }
 };
 
-module.exports = proxyReq;
+module.exports = { proxyReq };
