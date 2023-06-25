@@ -338,7 +338,10 @@ const amazonfetchIndividualDetails = async (url, browser, page) => {
           if (item !== " ") return item;
         });
         ranks = ranks.join(" ");
-        ranks = ranks.replaceAll("#", " ");
+        while (ranks.includes("#")) {
+          ranks = ranks.replace("#", " ");
+        }
+        // ranks = ranks.replaceAll("#", " ");
 
         num = ranks.split("  ");
       }
