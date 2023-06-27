@@ -27,6 +27,7 @@ const amazonbylink = async (url) => {
       executablePath: executablePath(),
       // devtools: true,
     });
+    url = url.replace("https", "http");
     console.log(url);
     let data = {
       Productlink: url,
@@ -43,7 +44,7 @@ const amazonbylink = async (url) => {
     }
 
     // Checking whether reviews page is available on the site or not
-    if (details.reviewsLink !== "https://amazon.inundefined") {
+    if (details.reviewsLink !== "http://amazon.inundefined") {
       const totalReviewsandratings = await amazonfetchReviews(
         details.reviewsLink,
         { browser },

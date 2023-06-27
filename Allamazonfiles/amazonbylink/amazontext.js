@@ -87,7 +87,7 @@ const amazontext = {
   A_NEGATIVE_FIRST_FD: "NEGATIVE_FIRST",
   A_BSR_IN_MOTHER_CATEGORY: "BSR_in_Mother_Category",
   A_BSR_IN_CATEGORY: "BSR_in_Category",
-  AMAZON_PAGE_LINK: "https://amazon.in",
+  AMAZON_PAGE_LINK: "http://amazon.in",
 };
 
 module.exports = amazontext;

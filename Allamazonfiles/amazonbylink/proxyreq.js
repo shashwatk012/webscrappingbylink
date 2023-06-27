@@ -1,6 +1,8 @@
 const { proxies_list } = require("../text");
 const http = require("http");
 const axios = require("axios");
+const cheerio = require("cheerio");
+const amazontext = require("./amazontext");
 
 const proxyReq = async (url) => {
   try {
@@ -23,7 +25,7 @@ const proxyReq = async (url) => {
       "X-Amzn-Trace-Id": "Root=1-646baec9-23c65be55fbb54967e9160ef",
     };
 
-    const num = Math.floor(Math.random() * 993);
+    const num = Math.floor(Math.random() * proxies_list.length);
 
     const [host, port] = proxies_list[num].split(":");
 
@@ -39,15 +41,20 @@ const proxyReq = async (url) => {
     });
 
     headers.httpAgent = agent;
-    headers.timeout = 3000;
+    headers.timeout = 5000;
 
     const response = await axios.get(targetUrl, headers);
     const html = response.data;
-    console.log(html.substring(1, 100));
 
-    return html;
+    // cheerio nodejs module to load html
+    let $ = cheerio.load(html);
+
+    let ProductName = $(amazontext.A_PRODUCTNAME_CN).text();
+    if (ProductName) {
+      return html;
+    }
+    return "";
   } catch (error) {
-    console.log(error);
     return "";
   }
 };

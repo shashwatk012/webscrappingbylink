@@ -382,6 +382,10 @@ const amazonfetchIndividualDetails = async (url, browser, page) => {
 
     await page.waitForTimeout(1000);
 
+    await page.screenshot({
+      path: "./screenshot.jpg",
+    });
+
     let lastHeight = await page.evaluate("document.body.scrollHeight");
 
     while (true) {
@@ -402,19 +406,10 @@ const amazonfetchIndividualDetails = async (url, browser, page) => {
 
     console.log(html.substring(1, 100));
 
-    let captchalink = $("div.a-row.a-text-center>img").attr("src");
-    let title = $("title").text();
+    // ProductName
+    let ProductName = $(amazontext.A_PRODUCTNAME_CN).text();
 
-    if (captchalink) {
-      console.log(captchalink);
-      while (true) {
-        html = await proxyReq(url);
-        if (html !== "") {
-          break;
-        }
-      }
-    } else if (title === "503 - Service Unavailable Error") {
-      console.log(title);
+    if (!ProductName) {
       while (true) {
         html = await proxyReq(url);
         if (html !== "") {
@@ -426,7 +421,6 @@ const amazonfetchIndividualDetails = async (url, browser, page) => {
     return scrapamazon(html);
   } catch (error) {
     try {
-      console.log(error);
       if (page) {
         await page.close();
       }
