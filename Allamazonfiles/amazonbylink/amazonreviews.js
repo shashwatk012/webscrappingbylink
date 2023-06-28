@@ -1,7 +1,6 @@
 const cheerio = require("cheerio");
 const amazontext = require("./amazontext");
-const { re } = require("mathjs");
-const proxyReq = require("./proxyreq");
+const { proxyReqforreviews } = require("./proxyreq");
 
 const amazonscrapreviews = (html) => {
   const $ = cheerio.load(html);
@@ -78,18 +77,18 @@ const amazonfetchReviews = async (url, browser, page) => {
       lastHeight = newHeight;
     }
 
-    const html = await page.content();
+    let html = await page.content();
 
     await page.close();
 
-    const $ = cheerio.load(html);
+    let $ = cheerio.load(html);
 
     // Scraping the Global number of reviews
     const noReviews = $(amazontext.A_NUM_REVIEWS_CN);
     numberReviews = noReviews.html();
     if (!numberReviews) {
       while (true) {
-        html = await proxyReq(url);
+        html = await proxyReqforreviews(url);
         if (html !== "") {
           break;
         }
@@ -105,7 +104,7 @@ const amazonfetchReviews = async (url, browser, page) => {
       console.log("Some thing Went Wrong on review.js");
       let html;
       while (true) {
-        html = await proxyReq(url);
+        html = await proxyReqforreviews(url);
         if (html !== "") {
           break;
         }
@@ -115,7 +114,7 @@ const amazonfetchReviews = async (url, browser, page) => {
       console.log("Some thing Went Wrong on review1.js");
       let html;
       while (true) {
-        html = await proxyReq(url);
+        html = await proxyReqforreviews(url);
         if (html !== "") {
           break;
         }
