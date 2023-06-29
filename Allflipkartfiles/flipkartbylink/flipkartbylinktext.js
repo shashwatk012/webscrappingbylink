@@ -26,6 +26,8 @@ const flipkartbylinktext = {
   F_DESCRIPTION_CN: "div._1mXcCf",
   F_NUMBEROFIMAGES_CN: "li._20Gt85._1Y_A6W",
   F_ALLRATINGS_CN: "div._13sFCC.miQW6D>ul._36LmXx>li._28Xb_u>div._1uJVNT",
+  F_ALLRATINGS_ALTERNATIVE_CN: "ul._36LmXx>li._28Xb_u",
+  F_ALLRATINGS_ALTERNATIVE2_CN: "ul._2jr1F_>li._28Xb_u",
   F_REVIEWS_CN: "div._1AtVbE>div._27M-vq>div.col>div.col._2wzgFH.K0kLPL",
   F_REVIEWS_TITLE_CN: "p._2-N8zT",
   F_REVIEWS_SUMMARY_CN: "div.t-ZTKy>div>div",
